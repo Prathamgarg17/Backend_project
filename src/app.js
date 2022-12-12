@@ -20,6 +20,9 @@ hbs.registerPartials(partials_path);
 app.get("/", (req, res) => {
     res.render("index")
 });
+app.get("/2", (req, res) => {
+    res.render("index2")
+});
 app.get("/login", (req, res) => {
     res.render("login")
 });
@@ -43,7 +46,7 @@ app.post("/register", async (req, res) => {
                 confirmpassword: cpassword
             })
             const registered = await registerEmployee.save();
-            res.status(201).render("index");
+            res.status(201).render("login");
         } else {
             res.send("passwords are not matching")
         }
@@ -59,7 +62,7 @@ app.post("/login", async(req, res) => {
 
         const useremail = await Register.findOne({email:email});
         if(useremail.password === password){
-            res.status(201).render("index");
+            res.status(201).render("index2");
         }else{
             res.send("invalid Email Detail")
         }
